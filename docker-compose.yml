@@ -7,3 +7,21 @@ services:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
       - POSTGRESQL_DATABASE=transactionsDB
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data
+  app:
+    build: .
+    ports:
+      - '3333:3333'
+    depends_on:
+      - transactionsDB
+    environment:
+      - DATABASE_URL="postgresql://docker:docker@transactionsDB:5432/transactionsDB"
+      - NODE_ENV=dev
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  pgdbdata:
