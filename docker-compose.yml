@@ -16,7 +16,7 @@ services:
     depends_on:
       - transactionsDB
     environment:
-      - DATABASE_URL="postgresql://docker:docker@transactionsDB:5432/transactionsDB"
+      - DATABASE_URL=postgresql://docker:docker@transactionsDB:5432/transactionsDB
       - NODE_ENV=dev
 
     volumes:
