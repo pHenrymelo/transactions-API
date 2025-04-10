@@ -1,6 +1,10 @@
-import { PrismaClient } from '@prisma/client'
+import cookie from '@fastify/cookie'
 import { fastify } from 'fastify'
+import { transactionRoutes } from './routes/transactionRoutes'
 
 export const app = fastify()
 
-export const prisma = new PrismaClient()
+app.register(cookie)
+app.register(transactionRoutes, {
+    prefix: '/transactions'
+})
